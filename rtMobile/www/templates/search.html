@@ -9,11 +9,11 @@
         <div class="spacer" style="width: 300px; height: 16px;"></div>
         <form id="search-form2" class="list ">
             <label class="item item-input " id="search-input2" name="origin">
-                <input type="text" placeholder="Origen">
+                <input type="text" placeholder="Origen" ng-change="search.searchLocationOrigin()" ng-model="search.origin">
             </label>
             <div class="spacer" style="width: 300px; height: 7px;"></div>
             <label class="item item-input " id="search-input3" name="destination">
-                <input type="text" placeholder="Destino">
+                <input type="text" placeholder="Destino" ng-change="search.searchLocationDestination()" ng-model="search.destination">
             </label>
             <div class="spacer" style="width: 300px; height: 7px;"></div>
             <label class="item item-input " id="search-input4" name="round">
