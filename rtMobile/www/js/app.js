@@ -7,11 +7,8 @@
 // 'starter.controllers' is found in controllers.js
 angular
   .module('app', 
-  ['ionic', 
-  'app.controllers', 
+  ['ionic',
   'app.routes', 
-  'app.services', 
-  'app.directives',
   'constants'
   ])
 

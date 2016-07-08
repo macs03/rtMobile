@@ -15,7 +15,8 @@ angular.module('app.routes', [])
     views: {
       'side-menu21': {
         templateUrl: 'templates/search.html',
-        controller: 'searchCtrl'
+        controller: 'SearchController',
+        controllerAs: 'search'
       }
     }
   })
@@ -25,7 +26,8 @@ angular.module('app.routes', [])
     views: {
       'side-menu21': {
         templateUrl: 'templates/login.html',
-        controller: 'loginCtrl'
+        controller: 'LoginController',
+        controllerAs: 'login'
       }
     }
   })
@@ -35,7 +37,8 @@ angular.module('app.routes', [])
     views: {
       'side-menu21': {
         templateUrl: 'templates/register.html',
-        controller: 'registerCtrl'
+        controller: 'RegisterController',
+        controllerAs: 'register'
       }
     }
   })
