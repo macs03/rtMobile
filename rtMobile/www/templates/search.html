@@ -7,22 +7,23 @@
             </div>
         </div>
         <div class="spacer" style="width: 300px; height: 16px;"></div>
-        <form id="search-form2" class="list ">
-            <label class="item item-input " id="search-input2" name="origin">
-                <input type="text" placeholder="Origen" ng-change="search.searchLocationOrigin()" ng-model="search.origin">
+        <form id="search-form2" class="list">
+            <label class="item item-input " id="search-origin" name="origin" ng-click="search.selectCity(1)">
+                <input type="text" placeholder="Origen" ng-model="search.origin">
             </label>
             <div class="spacer" style="width: 300px; height: 7px;"></div>
-            <label class="item item-input " id="search-input3" name="destination">
-                <input type="text" placeholder="Destino" ng-change="search.searchLocationDestination()" ng-model="search.destination">
+            <label class="item item-input " id="search-input3" name="destination" ng-click="search.selectCity(2)">
+                <input type="text" placeholder="Destino" ng-model="search.destination">
             </label>
             <div class="spacer" style="width: 300px; height: 7px;"></div>
-            <label class="item item-input " id="search-input4" name="round">
-                <input type="date" placeholder="Ida">
-            </label>
-            <div class="spacer" style="width: 300px; height: 7px;"></div>
-            <label class="item item-input " id="search-input5" name="return">
-                <input type="date" placeholder="Vuelta">
-            </label>
+            <div class="row" style="padding:0;">
+                <label class="item item-input col-50" id="search-input4" name="round">
+                    <input type="date" placeholder="Ida">
+                </label>
+                <label class="item item-input col-50" id="search-input5" name="return">
+                    <input type="date" placeholder="Vuelta">
+                </label>
+            </div>
             <div class="spacer" style="width: 300px; height: 7px;"></div>
             <label class="item item-input " id="search-input6" name="passengers">
                 <span class="input-label">Pasajeros</span>
@@ -30,5 +31,26 @@
             </label>
             <button id="search-button1" class=" button button-assertive  button-block icon ion-search "></button>
         </form>
-    </ion-content>
+        <script id="templates/modal.html" type="text/ng-template">
+        <ion-modal-view>
+            <ion-header-bar class="bar bar-header item-input-inset">
+                <label class="item-input-wrapper">
+                    <i class="icon ion-ios-search placeholder-icon"></i>
+                    <input type="search" placeholder="Buscar" ng-model="search.query" ng-change="search.searchLocation()">
+                </label>
+                <button class="button button-clear" ng-click="modal.hide()">
+                Cancelar
+                </button>
+            </ion-header-bar>
+            <ion-content>
+                <ul class="list">
+                    <li class="item" ng-repeat="city in search.selectableNames" ng-click="search.citySelected(city.name, city.country.name)">
+                        <h2>{{city.name}}</h2>
+                        <p>{{city.country.name}}</p>
+                    </li>
+                </ul>
+            </ion-content>
+        </ion-modal-view>
+        </script>
+        </ion-content>
 </ion-view>

@@ -4,43 +4,58 @@
     .module('app')
     .controller('SearchController',SearchController);
 
-    SearchController.$inject = ['$scope','locationFactory'];
+    SearchController.$inject = ['$scope','locationFactory','$ionicModal'];
 
-    function SearchController ($scope, locationFactory){
+    function SearchController ($scope, locationFactory,$ionicModal){
         var vm = this;
-        vm.searchLocationOrigin = searchLocationOrigin;
-        vm.searchLocationDestination = searchLocationDestination;
+        vm.searchLocation = searchLocation;
+        vm.citySelected = citySelected;
+        vm.selectCity = slectCity;
+        vm.selectableNames = [];
 
-        function searchLocationOrigin(){
-            locationFactory
-            .getAll(vm.origin)
-            .then(function(data){
-                console.log(data)
-            })
-            .catch(function(error){
-                console.log(error)
-            });
-        }
+        $ionicModal.fromTemplateUrl('templates/modal.html', {
+            scope: $scope
+        }).then(function(modal) {
+            $scope.modal = modal;
+        });
 
-        function searchLocationDestination(){
-            locationFactory
-            .getAll(vm.destination)
-            .then(function(data){
-                console.log(data)
-            })
-            .catch(function(error){
-                console.log(error)
-            });
+        function searchLocation(){
+            if(vm.query == ''){
+                vm.selectableNames = vm.suggestions;
+            }else{
+                locationFactory
+                    .getAll(vm.query)
+                    .then(function(data){
+                        vm.selectableNames = data.items
+                    })
+                    .catch(function(error){
+                        console.log(error)
+                    });
+            }
         }
 
         locationFactory
                 .getNearly()
                 .then(function (data) {
-                    console.log(data)
+                    vm.selectableNames = data.suggestions;
+                    vm.suggestions = data.suggestions;
                 })
                 .catch(function (error) {
                     console.log(error)
                 });
+
+        function citySelected(city, country){
+            if(vm.type === 1){
+                vm.origin = city+', '+ country;
+            }else{
+                vm.destination = city+', '+ country;
+            }
+            $scope.modal.hide()
+        }
+        function slectCity(type) {
+            vm.type = type;
+            $scope.modal.show()
+        }
 
     }
 
