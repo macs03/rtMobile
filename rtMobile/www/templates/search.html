@@ -32,25 +32,25 @@
             <button id="search-button1" class=" button button-assertive  button-block icon ion-search "></button>
         </form>
         <script id="templates/modal.html" type="text/ng-template">
-        <ion-modal-view>
-            <ion-header-bar class="bar bar-header item-input-inset">
-                <label class="item-input-wrapper">
+            <ion-modal-view>
+                <ion-header-bar class="bar bar-header item-input-inset">
+                    <label class="item-input-wrapper">
                     <i class="icon ion-ios-search placeholder-icon"></i>
                     <input type="search" placeholder="Buscar" ng-model="search.query" ng-change="search.searchLocation()">
                 </label>
-                <button class="button button-clear" ng-click="modal.hide()">
+                    <button class="button button-clear" ng-click="modal.hide()">
                 Cancelar
                 </button>
-            </ion-header-bar>
-            <ion-content>
-                <ul class="list">
-                    <li class="item" ng-repeat="city in search.selectableNames" ng-click="search.citySelected(city.name, city.country.name)">
-                        <h2>{{city.name}}</h2>
-                        <p>{{city.country.name}}</p>
-                    </li>
-                </ul>
-            </ion-content>
-        </ion-modal-view>
+                </ion-header-bar>
+                <ion-content>
+                    <ul class="list">
+                        <li class="item" ng-repeat="city in search.selectableNames" ng-click="search.citySelected(city.rt, city.country)">
+                            <h2>{{city.rt}}</h2>
+                            <p>{{city.country}}</p>
+                        </li>
+                    </ul>
+                </ion-content>
+            </ion-modal-view>
         </script>
-        </ion-content>
+    </ion-content>
 </ion-view>

@@ -15,15 +15,17 @@
             function getAll(query) {
                 var defered = $q.defer();
                 var promise = defered.promise;
-                var destination = [];
-
+                var destinations = [];
                 $http({
                     cache: false,
                     method:'GET',
                     url: apiRtUrl+'destinations/?q='+query
                 })
                 .success(function (data) {
-                    defered.resolve(data);
+                    for (var i = 0; i < data.items.length; i++) {
+                      destinations.push({label: data.items[i].name+', '+data.items[i].country.name, rt: data.items[i].rt, id: data.items[i].id, name: data.items[i].name+', '+data.items[i].country.name, country: data.items[i].country.name, countryCode: data.items[i].country.id});
+                    }
+                    defered.resolve(destinations);
                 })
                 .error(function (error) {
                     defered.reject(err);
@@ -35,14 +37,19 @@
             function getNearly() {
                 var defered = $q.defer();
                 var promise = defered.promise;
-
+                var destinations = [];
                 $http({
                     cache: false,
                     method:'GET',
                     url: apiRtUrl+'geolocate/?language=es',
                 })
                 .success(function(data) {
-                    defered.resolve(data);
+                    for (var i = 0; i < data.suggestions.length; i++) {
+                        if(data.suggestions[i].length == undefined){
+                            destinations.push({label: data.suggestions[i].name+', '+data.suggestions[i].country.name, rt: data.suggestions[i].rt, id: data.suggestions[i].id, name: data.suggestions[i].name+', '+data.suggestions[i].country.name, country: data.suggestions[i].country.name, countryCode: data.suggestions[i].country.id});
+                        }
+                    }
+                    defered.resolve(destinations);
                 })
                 .error(function(err) {
                     defered.reject(err);
